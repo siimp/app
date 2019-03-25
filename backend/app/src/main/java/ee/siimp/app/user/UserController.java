@@ -38,11 +38,12 @@ public class UserController {
     }
 
     @PostMapping("/{id:\\d+}/client")
-    public UserClientDto addClient(Principal principal, @PathVariable("id") Long userId,
+    public ResponseEntity<UserClientDto> addClient(Principal principal, @PathVariable("id") Long userId,
                                    @RequestBody @Valid UserClientForm userClientForm) {
         AuthorizationUtils.isSameUser(principal, userId);
         LOG.info("adding new client for user {}", userId);
-        return null;
+        Client client = clientService.save(userId, userClientForm);
+        return ResponseEntity.ok(UserClientDto.of(client));
     }
 
     @GetMapping("/{id:\\d+}/client/{clientId:\\d+}")

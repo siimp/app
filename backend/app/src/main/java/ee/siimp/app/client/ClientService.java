@@ -1,12 +1,15 @@
 package ee.siimp.app.client;
 
 import ee.siimp.app.country.CountryRepository;
+import ee.siimp.app.user.User;
+import ee.siimp.app.user.UserClientForm;
 import ee.siimp.app.user.UserClientUpdateForm;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.lang.invoke.MethodHandles;
 
 @Service
@@ -19,16 +22,30 @@ public class ClientService {
 
     private final CountryRepository countryRepository;
 
-    public Client update(Client client, UserClientUpdateForm updateForm) {
-        LOG.info("updating client {}", client);
+    private final EntityManager entityManager;
 
-        client.setAddress(updateForm.getAddress());
-        client.setCountry(countryRepository.getOne(updateForm.getCountry()));
-        client.setEmail(updateForm.getEmail());
-        client.setFirstName(updateForm.getFirstName());
-        client.setLastName(updateForm.getLastName());
-        client.setUserName(updateForm.getUserName());
+    public Client update(Client client, UserClientUpdateForm updateForm) {
+        LOG.info("updating client {} with data {}", client.getId(), updateForm);
+
+        updateClient(client, updateForm);
         client.setVersion(updateForm.getVersion());
         return clientRepository.save(client);
+    }
+
+    public Client save(Long userId, UserClientForm userClientForm) {
+        LOG.info("creating new client with data {}", userClientForm);
+        Client client = new Client();
+        updateClient(client, userClientForm);
+        client.setUser(entityManager.getReference(User.class, userId));
+        return clientRepository.save(client);
+    }
+
+    private void updateClient(Client client, UserClientForm form) {
+        client.setAddress(form.getAddress());
+        client.setCountry(countryRepository.getOne(form.getCountry()));
+        client.setEmail(form.getEmail());
+        client.setFirstName(form.getFirstName());
+        client.setLastName(form.getLastName());
+        client.setUserName(form.getUserName());
     }
 }
