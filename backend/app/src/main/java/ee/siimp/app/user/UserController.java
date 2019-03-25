@@ -1,4 +1,4 @@
-package ee.siimp.app.appuser;
+package ee.siimp.app.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import java.lang.invoke.MethodHandles;
 import java.security.Principal;
 
 @RestController
-public class AppUserController {
+public class UserController {
 
     private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
@@ -18,4 +18,6 @@ public class AppUserController {
         LOG.info("returning user info for user {}", principal.getName());
         return principal;
     }
+
+
 }

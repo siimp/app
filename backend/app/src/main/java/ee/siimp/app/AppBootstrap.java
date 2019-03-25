@@ -5,8 +5,8 @@ import ee.siimp.app.client.ClientRepository;
 import ee.siimp.app.country.Country;
 import ee.siimp.app.country.CountryRepository;
 
-import ee.siimp.app.appuser.AppUser;
-import ee.siimp.app.appuser.AppUserRepository;
+import ee.siimp.app.user.User;
+import ee.siimp.app.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AppBootstrap implements InitializingBean {
 
-    private final AppUserRepository appUserRepository;
+    private final UserRepository userRepository;
 
     private final CountryRepository countryRepository;
 
@@ -34,12 +34,12 @@ public class AppBootstrap implements InitializingBean {
         List<Client> clients = createClients();
 
 
-        AppUser user1 = AppUser.builder()
+        User user1 = User.builder()
                 .username("test")
                 .encryptedPassword(passwordEncoder.encode("test"))
                 .clients(clients)
                 .build();
-        appUserRepository.save(user1);
+        userRepository.save(user1);
 
     }
 

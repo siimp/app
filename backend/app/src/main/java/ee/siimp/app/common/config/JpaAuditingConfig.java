@@ -1,4 +1,4 @@
-package ee.siimp.app.config;
+package ee.siimp.app.common.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
