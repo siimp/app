@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: initial-schema.yaml
+  - include:
+      file: initial-data.yaml

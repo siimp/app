@@ -1,4 +1,4 @@
-package ee.siimp.app.oauth2.config;
+package ee.siimp.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

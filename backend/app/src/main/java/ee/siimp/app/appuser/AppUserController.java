@@ -1,4 +1,4 @@
-package ee.siimp.app.oauth2.controller;
+package ee.siimp.app.appuser;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import java.lang.invoke.MethodHandles;
 import java.security.Principal;
 
 @RestController
-public class UserController {
+public class AppUserController {
 
     private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
