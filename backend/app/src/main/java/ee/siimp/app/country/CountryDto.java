@@ -4,6 +4,6 @@ import lombok.Value;
 
 @Value
 class CountryDto {
-    private Long id;
-    private String name;
+    Long id;
+    String name;
 }
