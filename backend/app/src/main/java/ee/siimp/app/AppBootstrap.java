@@ -11,7 +11,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -33,22 +32,21 @@ public class AppBootstrap implements InitializingBean {
         User user1 = User.builder()
                 .username("test")
                 .encryptedPassword(passwordEncoder.encode("test"))
-                .clients(createUser1Clients())
                 .build();
-        userRepository.save(user1);
+        user1 = userRepository.save(user1);
+        createUser1Clients(user1);
 
         User user2 = User.builder()
                 .username("other")
                 .encryptedPassword(passwordEncoder.encode("other"))
-                .clients(createUser2Clients())
                 .build();
-        userRepository.save(user2);
+        user2 = userRepository.save(user2);
+        createUser2Clients(user2);
 
     }
 
-    private List<Client> createUser2Clients() {
+    private void createUser2Clients(User user) {
         List<Country> countries = countryRepository.findAll();
-        List<Client> clients = new ArrayList<>();
 
         Client client1 = Client.builder()
                 .address("other client 1 address")
@@ -57,16 +55,13 @@ public class AppBootstrap implements InitializingBean {
                 .firstName("otherclient1")
                 .lastName("otherclient1last")
                 .userName("other_client1_username")
+                .user(user)
                 .build();
-        clients.add(clientRepository.save(client1));
-
-        return clients;
+        clientRepository.save(client1);
     }
 
-    private List<Client> createUser1Clients() {
+    private void createUser1Clients(User user) {
         List<Country> countries = countryRepository.findAll();
-        List<Client> clients = new ArrayList<>();
-
 
         Client client1 = Client.builder()
                 .address("client 1 address")
@@ -75,8 +70,9 @@ public class AppBootstrap implements InitializingBean {
                 .firstName("client1")
                 .lastName("client1last")
                 .userName("client1_username")
+                .user(user)
                 .build();
-        clients.add(clientRepository.save(client1));
+        clientRepository.save(client1);
 
         Client client2 = Client.builder()
                 .address("client 2 address")
@@ -85,10 +81,9 @@ public class AppBootstrap implements InitializingBean {
                 .firstName("client2")
                 .lastName("client2last")
                 .userName("client2_username")
+                .user(user)
                 .build();
-        clients.add(clientRepository.save(client2));
-
-        return clients;
+        clientRepository.save(client2);
     }
 
     private void createCountries() {

@@ -21,14 +21,14 @@ import java.util.List;
 public class User extends BaseEntity {
 
     @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @NotBlank
     @Column(nullable = false)
     private String encryptedPassword;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     @Singular
     private List<Client> clients;
 }

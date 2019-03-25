@@ -10,8 +10,5 @@ import javax.validation.constraints.NotNull;
 public class UserClientUpdateForm extends UserClientForm {
 
     @NotNull
-    private Long id;
-
-    @NotNull
     private Long version;
 }

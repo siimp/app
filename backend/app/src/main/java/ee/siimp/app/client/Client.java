@@ -2,6 +2,7 @@ package ee.siimp.app.client;
 
 import ee.siimp.app.common.entity.BaseEntity;
 import ee.siimp.app.country.Country;
+import ee.siimp.app.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +18,11 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class Client extends BaseEntity {
 
+    @NotNull
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false, updatable = false)
+    private User user;
+
     @NotBlank
     @Column(nullable = false)
     private String firstName;
@@ -26,7 +32,7 @@ public class Client extends BaseEntity {
     private String lastName;
 
     @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String userName;
 
     @NotBlank
