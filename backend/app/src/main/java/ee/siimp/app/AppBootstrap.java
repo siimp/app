@@ -54,7 +54,7 @@ public class AppBootstrap implements InitializingBean {
                 .email("otherclient1@email.com")
                 .firstName("otherclient1")
                 .lastName("otherclient1last")
-                .userName("other_client1_username")
+                .username("other_client1_username")
                 .user(user)
                 .build();
         clientRepository.save(client1);
@@ -69,7 +69,7 @@ public class AppBootstrap implements InitializingBean {
                 .email("client1@email.com")
                 .firstName("client1")
                 .lastName("client1last")
-                .userName("client1_username")
+                .username("client1_username")
                 .user(user)
                 .build();
         clientRepository.save(client1);
@@ -80,7 +80,7 @@ public class AppBootstrap implements InitializingBean {
                 .email("client2@email.com")
                 .firstName("client2")
                 .lastName("client2last")
-                .userName("client2_username")
+                .username("client2_username")
                 .user(user)
                 .build();
         clientRepository.save(client2);

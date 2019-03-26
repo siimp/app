@@ -10,7 +10,7 @@ import java.util.Collections;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-class AppUserDetails extends org.springframework.security.core.userdetails.User {
+public class AppUserDetails extends org.springframework.security.core.userdetails.User {
 
     private Long userId;
 

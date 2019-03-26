@@ -46,6 +46,6 @@ public class ClientService {
         client.setEmail(form.getEmail());
         client.setFirstName(form.getFirstName());
         client.setLastName(form.getLastName());
-        client.setUserName(form.getUserName());
+        client.setUsername(form.getUserName());
     }
 }

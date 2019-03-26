@@ -4,6 +4,7 @@ import ee.siimp.app.client.Client;
 import ee.siimp.app.client.ClientRepository;
 import ee.siimp.app.client.ClientService;
 import ee.siimp.app.common.utils.EntityUtils;
+import ee.siimp.app.security.AppUserDetails;
 import ee.siimp.app.security.AuthorizationUtils;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -28,6 +29,13 @@ public class UserController {
 
     private final ClientService clientService;
 
+    @GetMapping
+    public UserDto currentUser(Principal principal) {
+        LOG.info("returning user info for user {}", principal.getName());
+        AppUserDetails appUserDetails = AuthorizationUtils.getAppUserDetails(principal);
+        return new UserDto(appUserDetails.getUserId(), appUserDetails.getUsername());
+    }
+
     @GetMapping("/{id:\\d+}/client")
     public Collection<UserClientDto> findAll(Principal principal, @PathVariable("id") Long userId) {
         AuthorizationUtils.isSameUser(principal, userId);
@@ -39,7 +47,7 @@ public class UserController {
 
     @PostMapping("/{id:\\d+}/client")
     public ResponseEntity<UserClientDto> addClient(Principal principal, @PathVariable("id") Long userId,
-                                   @RequestBody @Valid UserClientForm userClientForm) {
+                                                   @RequestBody @Valid UserClientForm userClientForm) {
         AuthorizationUtils.isSameUser(principal, userId);
         LOG.info("adding new client for user {}", userId);
         Client client = clientService.save(userId, userClientForm);

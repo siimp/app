@@ -33,7 +33,7 @@ public class Client extends BaseEntity {
 
     @NotBlank
     @Column(nullable = false, unique = true)
-    private String userName;
+    private String username;
 
     @NotBlank
     @Email

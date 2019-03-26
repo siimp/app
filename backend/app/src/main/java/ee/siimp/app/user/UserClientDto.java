@@ -14,10 +14,10 @@ class UserClientDto {
     Long version;
     String firstName;
     String lastName;
-    String userName;
+    String username;
 
     static UserClientDto of(Client client) {
         return new UserClientDto(client.getId(), client.getVersion(),
-                client.getFirstName(), client.getLastName(), client.getUserName());
+                client.getFirstName(), client.getLastName(), client.getUsername());
     }
 }
