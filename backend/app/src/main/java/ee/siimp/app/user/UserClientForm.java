@@ -20,9 +20,8 @@ public class UserClientForm {
     private String lastName;
 
     @NotBlank
-    private String userName;
+    private String username;
 
-    @NotBlank
     @Email
     private String email;
 

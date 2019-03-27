@@ -35,9 +35,7 @@ public class Client extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @NotBlank
     @Email
-    @Column(nullable = false)
     private String email;
 
     @NotBlank
