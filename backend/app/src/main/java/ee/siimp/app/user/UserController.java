@@ -55,19 +55,20 @@ public class UserController {
     }
 
     @GetMapping("/{id:\\d+}/client/{clientId:\\d+}")
-    public ResponseEntity<UserClientDto> getClient(Principal principal, @PathVariable("id") Long userId,
+    public ResponseEntity<UserClientUpdateForm> getClient(Principal principal, @PathVariable("id") Long userId,
                                                    @PathVariable("clientId") Long clientId) {
         AuthorizationUtils.isSameUser(principal, userId);
         LOG.info("getting client info for user {}", userId);
 
-        Optional<UserClientDto> userClientDtoOptional = clientRepository.findByIdAndUserId(clientId, userId, UserClientDto.class);
-        if (userClientDtoOptional.isPresent()) {
-            LOG.info("found client {}", userClientDtoOptional.get());
+        Optional<Client> userClientOptional =
+                clientRepository.findByIdAndUserId(clientId, userId);
+        if (userClientOptional.isPresent()) {
+            LOG.info("found client {}", userClientOptional.get());
         } else {
             LOG.error("no client found with id {}", clientId);
         }
 
-        return ResponseEntity.of(userClientDtoOptional);
+        return ResponseEntity.of(UserClientUpdateForm.ofOptional(userClientOptional));
     }
 
     @PutMapping("/{id:\\d+}/client/{clientId:\\d+}")

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Clients v-if="getUser.id"/>
+    <Clients v-if="user.id"/>
   </div>
 </template>
 
@@ -16,8 +16,8 @@ import { User } from '@/types';
     Clients,
   },
   computed: {
-    ...mapGetters([
-        'getUser',
+    ...mapState([
+        'user',
     ]),
   },
   methods: {

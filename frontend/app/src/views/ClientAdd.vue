@@ -10,42 +10,58 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" v-model="form.firstName" placeholder="" value="">
+                <input type="text" class="form-control" v-bind:class="{ 'is-invalid' : !!errors.firstName }" 
+                  id="firstName" v-model="form.firstName" placeholder="" value="">
+                <div v-if="!!errors.firstName" class="invalid-feedback">
+                  {{errors.firstName.defaultMessage}}
+                </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" v-model="form.lastName" placeholder="" value="">
+                <input type="text" class="form-control" v-bind:class="{ 'is-invalid' : !!errors.lastName }" 
+                  id="lastName" v-model="form.lastName" placeholder="" value="">
+                <div v-if="!!errors.lastName" class="invalid-feedback">
+                  {{errors.lastName.defaultMessage}}
+                </div>
               </div>
             </div>
 
             <div class="mb-3">
               <label for="username">Username</label>
               <div class="input-group">
-                <input type="text" class="form-control" id="username" v-model="form.username" placeholder="Username">
+                <input type="text" class="form-control" v-bind:class="{ 'is-invalid' : !!errors.username }"
+                  id="username" v-model="form.username" placeholder="Username">
+                <div v-if="!!errors.username" class="invalid-feedback">
+                  {{errors.username.defaultMessage}}
+                </div>
               </div>
             </div>
 
             <div class="mb-3">
               <label for="email">Email <span class="text-muted">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" v-model="form.email" placeholder="you@example.com">
-
+              <input type="email" class="form-control" v-bind:class="{ 'is-invalid' : !!errors.email }" 
+                id="email" v-model="form.email" placeholder="you@example.com">
+              <div v-if="!!errors.email" class="invalid-feedback">
+                  {{errors.email.defaultMessage}}
+              </div>
             </div>
 
             <div class="mb-3">
               <label for="address">Address</label>
-              <input type="text" class="form-control" id="address" v-model="form.address" placeholder="1234 Main St">
+              <input type="text" class="form-control" v-bind:class="{ 'is-invalid' : !!errors.address }"
+                id="address" v-model="form.address" placeholder="1234 Main St">
+              <div v-if="!!errors.address" class="invalid-feedback">
+                {{errors.address.defaultMessage}}
+              </div>
             </div>
 
             <div class="mb-3">
               <label for="country">Country</label>
-                <select class="custom-select d-block w-100" id="country" v-model="form.country">
-                  <option value="">Choose...</option>
-                  <option>Estonia</option>
-                  <option>Latvia</option>
-                  <option>Lithuania</option>
-                  <option>Finland</option>
-                  <option>Sweden</option>
-                </select>
+                <CountrySelect class="custom-select d-block w-100" v-bind:class="{ 'is-invalid' : !!errors.country }" 
+                  id="country" v-model="form.country" />
+                <div v-if="!!errors.country" class="invalid-feedback">
+                  {{errors.country.defaultMessage}}
+                </div>
             </div>
             <hr class="mb-4">
 			
@@ -61,8 +77,12 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import axios from 'axios';
 import { Client, ClientAddForm, User } from '@/types';
 import { mapState, mapGetters, mapActions } from 'vuex';
+import CountrySelect from '@/components/CountrySelect.vue';
 
 @Component({
+  components: {
+    CountrySelect,
+  },
   computed: {
     ...mapState([
         'API_URL',
@@ -75,10 +95,10 @@ import { mapState, mapGetters, mapActions } from 'vuex';
     ]),
   },
 })
-export default class ClientView extends Vue {
+export default class ClientAdd extends Vue {
 
     private form?: ClientAddForm;
-
+    private errors?: any;
     private API_URL?: string;
 
     public mounted() {
@@ -93,24 +113,22 @@ export default class ClientView extends Vue {
         this.$router.push('/');
       })
       .catch((errorResponse) => {
+        const newErrors = {} as any;
         if (errorResponse.response.data && Array.isArray(errorResponse.response.data.errors)) {
           errorResponse.response.data.errors.forEach((error: any) => {
-            console.log(error.field, error.defaultMessage);
+            newErrors[error.field] = {
+              defaultMessage: error.defaultMessage,
+            };
           });
+          this.errors = newErrors;
         }
       });
     }
 
     public data() {
       return {
-        form: {
-          firstName: '',
-          lastName: '',
-          username: '',
-          email: '',
-          address: '',
-          country: 0,
-        } as ClientAddForm,
+        form: {} as ClientAddForm,
+        errors: {},
       };
     }
 }
