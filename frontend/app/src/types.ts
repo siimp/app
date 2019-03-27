@@ -11,6 +11,11 @@ export interface Client {
     username: string;
 }
 
-export interface RootState {
-    API_URL: string;
+export interface ClientAddForm {
+    firstName: string;
+    lastName: string;
+    username: string;
+    email: string;
+    address: string;
+    country: number;
 }

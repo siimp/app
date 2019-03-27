@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -29,5 +30,6 @@ public class UserClientForm {
     private String address;
 
     @NotNull
+    @Min(1)
     private Long country;
 }
