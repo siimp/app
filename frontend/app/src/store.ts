@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { User } from '@/types';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
@@ -11,8 +12,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setUser: (state, user: User) => {
-      state.user.id = user.id;
-      state.user.username = user.username;
+      state.user = user;
     },
   },
   getters: {
@@ -21,6 +21,18 @@ export default new Vuex.Store({
     },
   },
   actions: {
-
+    loadUser: (context) => {
+      if (!context.getters.getUser.id) {
+        axios
+        .get(context.state.API_URL + '/user')
+        .then((response) => {
+          const newUser: User = response.data;
+          context.commit('setUser', newUser);
+        })
+        .catch((errorResponse) => {
+          console.log(errorResponse);
+        });
+      }
+    },
   },
 });

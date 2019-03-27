@@ -4,7 +4,7 @@
         <h2>Clients</h2>
     </div>
     <div class="row">
-        <a href="client.html" class="btn btn-primary">Add client</a>
+        <router-link to="/client" class="btn btn-primary">Add client</router-link>
         <table class="table">
         <thead>
             <tr>
@@ -22,7 +22,7 @@
                 <td>{{client.lastName}}</td>
                 <td>{{client.username}}</td>
                 <td>
-                    <a href="client.html" class="btn btn-primary">Edit client</a>
+                    <router-link :to="'/client/' + client.id" class="btn btn-primary">Edit client</router-link>
                 </td>
             </tr>
         </tbody>
@@ -57,7 +57,6 @@ export default class Clients extends Vue {
         axios
             .get(this.API_URL + '/user/' + user.id + '/client')
             .then((response) => {
-                console.log(response.data);
                 response.data.forEach((client: Client) => {
                     this.clients.push(client);
                 });

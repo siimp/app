@@ -13,7 +13,9 @@
 
 <style>
 #nav {
-  padding: 30px;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
   text-align: right;
 }
 
