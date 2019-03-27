@@ -19,3 +19,12 @@ export interface ClientAddForm {
     address: string;
     country: number;
 }
+
+export interface ClientEditForm extends ClientAddForm {
+    version: number;
+}
+
+export interface Country {
+    id: number;
+    name: string;
+}
