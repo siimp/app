@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user.id && form.version" class="container">
+  <div v-if="user.id && form.version >= 0" class="container">
       <div class="py-5 text-center">
         <h2>Edit Client</h2>
       </div>

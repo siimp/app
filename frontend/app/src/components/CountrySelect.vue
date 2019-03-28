@@ -1,7 +1,7 @@
 <template>
-    <select v-show="isDataLoaded" v-model="value" @change='setValue($event.target.value)'>
+    <select v-show="isDataLoaded" :value="value" @input="$emit('input', $event.target.value)">
       <option v-if="!isDataLoaded">loading countries</option>
-      <option v-if="isDataLoaded" value="">{{value}}Choose...</option>
+      <option v-if="isDataLoaded" value="">Choose...</option>
       <option
         v-for='(country) in countries'
         v-bind:key='country.id'
@@ -21,19 +21,15 @@ import { mapActions, mapState } from 'vuex';
   },
   methods: {
     ...mapActions(['loadCountries']),
-    setValue(value) {
-      this.$emit('input', value);
-    },
   },
   data: () => {
     return {
       isDataLoaded: false,
     };
   },
+  props: ['value'],
 })
 export default class CountrySelect extends Vue {
-  @Prop() public value?: number;
-
   public mounted() {
     const promise: Promise<void> = (this as any).loadCountries();
     promise.then(() => {
