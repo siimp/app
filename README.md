@@ -13,10 +13,11 @@ Frontend raamistik, põhilised teegid ja keel
 
 Backend raamistik, põhilised teegid ja keel
 * Spring-boot
-* Java, koodi struktuur on by-feature.
+* Java (10.0.1)
 * Gradle
 * jpa, spring-security, liquibase, lombok, h2
 * SonarLint - staatiline koodi analüüs
+* Koodi struktuur on by-feature
 
 
 ## Rakenduse jooksutamine
