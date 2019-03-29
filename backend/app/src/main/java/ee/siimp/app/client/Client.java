@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(indexes = {@Index(name = "idx_id_user_id", columnList = "id, user_id")})
 public class Client extends BaseEntity {
 
     @NotNull
