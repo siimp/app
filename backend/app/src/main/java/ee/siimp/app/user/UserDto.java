@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserDto {
+class UserDto {
     Long id;
     String username;
 }

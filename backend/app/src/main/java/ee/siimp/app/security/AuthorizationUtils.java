@@ -9,7 +9,6 @@ import java.security.Principal;
 public class AuthorizationUtils {
 
     public static void isSameUser(Principal principal, Long userId) {
-
         AppUserDetails appUserDetails = getAppUserDetails(principal);
         if (appUserDetails != null) {
             if (userId != null && userId.equals(appUserDetails.getUserId())) {

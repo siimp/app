@@ -27,7 +27,7 @@ public class ClientService {
     public Client update(Client client, UserClientUpdateForm updateForm) {
         LOG.info("updating client {} with data {}", client.getId(), updateForm);
 
-        updateClient(client, updateForm);
+        updateClientFromForm(client, updateForm);
         client.setVersion(updateForm.getVersion());
         return clientRepository.save(client);
     }
@@ -35,12 +35,12 @@ public class ClientService {
     public Client save(Long userId, UserClientForm userClientForm) {
         LOG.info("creating new client with data {}", userClientForm);
         Client client = new Client();
-        updateClient(client, userClientForm);
+        updateClientFromForm(client, userClientForm);
         client.setUser(entityManager.getReference(User.class, userId));
         return clientRepository.save(client);
     }
 
-    private void updateClient(Client client, UserClientForm form) {
+    private void updateClientFromForm(Client client, UserClientForm form) {
         client.setAddress(form.getAddress());
         client.setCountry(countryRepository.getOne(form.getCountry()));
         client.setEmail(form.getEmail());

@@ -10,9 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.lang.invoke.MethodHandles;
 import java.security.Principal;
 import java.util.Collection;
@@ -21,6 +23,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@Validated
 public class UserController {
 
     private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -38,7 +41,8 @@ public class UserController {
     }
 
     @GetMapping("/{id:\\d+}/client")
-    public Collection<UserClientDto> findAll(Principal principal, @PathVariable("id") Long userId) {
+    public Collection<UserClientDto> findAll(Principal principal,
+                                             @Valid @Min(1) @PathVariable("id") Long userId) {
         AuthorizationUtils.isSameUser(principal, userId);
         LOG.info("finding all clients");
         Collection<UserClientDto> result = clientRepository.findAllByUserId(userId, UserClientDto.class);
@@ -47,7 +51,7 @@ public class UserController {
     }
 
     @PostMapping("/{id:\\d+}/client")
-    public ResponseEntity<UserClientDto> addClient(Principal principal, @PathVariable("id") Long userId,
+    public ResponseEntity<UserClientDto> addClient(Principal principal, @Valid @Min(1) @PathVariable("id") Long userId,
                                                    @RequestBody @Valid UserClientForm userClientForm) {
         AuthorizationUtils.isSameUser(principal, userId);
         LOG.info("adding new client");
@@ -57,7 +61,8 @@ public class UserController {
     }
 
     @GetMapping("/{id:\\d+}/client/{clientId:\\d+}")
-    public ResponseEntity<UserClientUpdateForm> getClient(Principal principal, @PathVariable("id") Long userId,
+    public ResponseEntity<UserClientUpdateForm> getClient(Principal principal,
+                                                          @Valid @Min(1) @PathVariable("id") Long userId,
                                                           @PathVariable("clientId") Long clientId) {
         AuthorizationUtils.isSameUser(principal, userId);
         LOG.info("getting client (id={}) info", clientId);
@@ -74,8 +79,9 @@ public class UserController {
     }
 
     @PutMapping("/{id:\\d+}/client/{clientId:\\d+}")
-    public ResponseEntity<UserClientDto> updateClient(Principal principal, @PathVariable("id") Long userId,
-                                                      @PathVariable("clientId") Long clientId,
+    public ResponseEntity<UserClientDto> updateClient(Principal principal,
+                                                      @Valid @Min(1) @PathVariable("id") Long userId,
+                                                      @Valid @Min(1) @PathVariable("clientId") Long clientId,
                                                       @RequestBody @Valid UserClientUpdateForm userClientUpdateForm) {
         AuthorizationUtils.isSameUser(principal, userId);
         LOG.info("updating client id={}", clientId);

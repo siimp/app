@@ -1,7 +1,7 @@
 package ee.siimp.app.user;
 
-import ee.siimp.app.common.entity.BaseEntity;
 import ee.siimp.app.client.Client;
+import ee.siimp.app.common.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.Column;
