@@ -30,6 +30,7 @@ public class AppUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
 
+        LOG.info("found user {}", username);
         return new AppUserDetails(userOptional.get());
     }
 }

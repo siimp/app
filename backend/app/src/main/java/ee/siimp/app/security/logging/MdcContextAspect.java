@@ -1,6 +1,7 @@
 package ee.siimp.app.security.logging;
 
 
+import ee.siimp.app.security.AppUserDetails;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -22,7 +23,8 @@ public class MdcContextAspect {
     @Around("restController()")
     public Object mdc(ProceedingJoinPoint joinPoint) throws Throwable {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MDC.put("USER", String.format("[user=%s]", authentication.getName()));
+        AppUserDetails appUserDetails = (AppUserDetails) authentication.getPrincipal();
+        MDC.put("USER", String.format("[user=%s; id=%d]", appUserDetails.getUsername(), appUserDetails.getUserId()));
         return joinPoint.proceed();
     }
 }

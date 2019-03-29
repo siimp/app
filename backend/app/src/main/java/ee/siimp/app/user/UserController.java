@@ -31,7 +31,7 @@ public class UserController {
 
     @GetMapping
     public UserDto currentUser(Principal principal) {
-        LOG.info("returning user info for user {}", principal.getName());
+        LOG.info("returning user info");
         AppUserDetails appUserDetails = AuthorizationUtils.getAppUserDetails(principal);
         LOG.info("found user {}", appUserDetails.getUsername());
         return new UserDto(appUserDetails.getUserId(), appUserDetails.getUsername());
@@ -40,7 +40,7 @@ public class UserController {
     @GetMapping("/{id:\\d+}/client")
     public Collection<UserClientDto> findAll(Principal principal, @PathVariable("id") Long userId) {
         AuthorizationUtils.isSameUser(principal, userId);
-        LOG.info("finding all clients for user {}", userId);
+        LOG.info("finding all clients");
         Collection<UserClientDto> result = clientRepository.findAllByUserId(userId, UserClientDto.class);
         LOG.info("found {} results", result.size());
         return result;
@@ -50,7 +50,7 @@ public class UserController {
     public ResponseEntity<UserClientDto> addClient(Principal principal, @PathVariable("id") Long userId,
                                                    @RequestBody @Valid UserClientForm userClientForm) {
         AuthorizationUtils.isSameUser(principal, userId);
-        LOG.info("adding new client for user {}", userId);
+        LOG.info("adding new client");
         Client client = clientService.save(userId, userClientForm);
         LOG.info("adding new client succeeded, new client id is {}", client.getId());
         return ResponseEntity.ok(UserClientDto.of(client));
@@ -58,9 +58,9 @@ public class UserController {
 
     @GetMapping("/{id:\\d+}/client/{clientId:\\d+}")
     public ResponseEntity<UserClientUpdateForm> getClient(Principal principal, @PathVariable("id") Long userId,
-                                                   @PathVariable("clientId") Long clientId) {
+                                                          @PathVariable("clientId") Long clientId) {
         AuthorizationUtils.isSameUser(principal, userId);
-        LOG.info("getting client info for user {}", userId);
+        LOG.info("getting client (id={}) info", clientId);
 
         Optional<Client> userClientOptional =
                 clientRepository.findByIdAndUserId(clientId, userId);
