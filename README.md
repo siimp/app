@@ -1,7 +1,7 @@
 # Näidisrakendus
-Kogu rakendus käivitab `bootRun` käsuga, frontend koodi serveerib spring-boot rakendus public resurrside kaustast. 
-Kasutaja autentitakse kasutaja nime ja parooliga (vt testkasutajad allpool) ning sessioon hoitakse püsti küpsise abil.
-Kõik kasutaja tegevused logitakse ja sisaldavad kasutaja andmeid (MDC).
+Kogu rakendus käivitab `bootRun` käsuga, frontend koodi serveerib spring-boot rakendus public ressursside kaustast. 
+Kasutaja autentitakse kasutajanime ja parooliga (vt pt Testkasutajad allpool) ning sessioon hoitakse püsti küpsise abil.
+Kõik kasutaja tegevused logitakse (korrelatsiooni id'd ei ole aga kõigi logi kirjete juures on kasutaja info').
 
 ## Kasutatud tarkvara
 Frontend raamistik, põhilised teegid ja keel
@@ -31,7 +31,7 @@ rakenduse jookseb aadressil http://localhost:8080
 | juku | 12345 |
 | admin | admin |
 
-## Frontent rakenduse ehitamine
+## Frontent rakenduse ehitamine (valikuline)
 ```sh
 $ cd frontend/app
 $ yarn build
@@ -46,4 +46,5 @@ saab toimuda ainult GET päringute suunal, POST päringute puhul kaitseb CORS se
 frontend, kui ka backend poole peal, et vältida asjatuid päringuid serverisse.
 * REST teenust turvatakse küpsisega. Õigem oleks kasutada token'i põhist stateless lähenemist nagu oauth2 + JWT. 
 Et jätta rakenduse kood võimalikult väiekseks ja lihtsaks otsustasin mitte oauth2'te kasutada (Oleks juurde tulnud ressursi serveri ja autroseerimis serveri kood).
+* Rakendus jookseb http peal, mitte https peal. (kasutaja nimi ja parool liiguva üle võrgu teksti kujul).
 
