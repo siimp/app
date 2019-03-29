@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().permitAll()
                 .and()
-                .csrf().disable();//FIXME: enable csrf
+                .csrf().disable();
     }
 
     @Override

@@ -9,12 +9,14 @@ Frontend raamistik, põhilised teegid ja keel
 * typescript
 * vuex, vue-router, axios
 * kasutajaliidese jaoks bootstrap
+* tslint - staatiline koodi analüüs
 
 Backend raamistik, põhilised teegid ja keel
 * Spring-boot
 * Java, koodi struktuur on by-feature.
 * Gradle
 * jpa, spring-security, liquibase, lombok, h2
+* SonarLint - staatiline koodi analüüs
 
 
 ## Rakenduse jooksutamine
