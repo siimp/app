@@ -1,0 +1,283 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1553855357631-1
+      author: siim (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: CONSTRAINT_7
+                  name: ID
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: CREATED_DATE
+                  type: TIMESTAMP
+              - column:
+                  constraints:
+                    nullable: false
+                  name: UPDATED_DATE
+                  type: TIMESTAMP
+              - column:
+                  constraints:
+                    nullable: false
+                  name: VERSION
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ENCRYPTED_PASSWORD
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: USERNAME
+                  type: VARCHAR(255)
+            tableName: APP_USER
+  - changeSet:
+      id: 1553855357631-2
+      author: siim (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: CONSTRAINT_76
+                  name: ID
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: CREATED_DATE
+                  type: TIMESTAMP
+              - column:
+                  constraints:
+                    nullable: false
+                  name: UPDATED_DATE
+                  type: TIMESTAMP
+              - column:
+                  constraints:
+                    nullable: false
+                  name: VERSION
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ADDRESS
+                  type: VARCHAR(255)
+              - column:
+                  name: EMAIL
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: FIRST_NAME
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: LAST_NAME
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: USERNAME
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: COUNTRY_ID
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: USER_ID
+                  type: BIGINT
+            tableName: CLIENT
+  - changeSet:
+      id: 1553855357631-3
+      author: siim (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: CONSTRAINT_6
+                  name: ID
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: CREATED_DATE
+                  type: TIMESTAMP
+              - column:
+                  constraints:
+                    nullable: false
+                  name: UPDATED_DATE
+                  type: TIMESTAMP
+              - column:
+                  constraints:
+                    nullable: false
+                  name: VERSION
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: NAME
+                  type: VARCHAR(255)
+            tableName: COUNTRY
+  - changeSet:
+      id: 1553855357631-4
+      author: siim (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: CONSTRAINT_2
+                  name: ID
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: CREATED_DATE
+                  type: TIMESTAMP
+              - column:
+                  constraints:
+                    nullable: false
+                  name: UPDATED_DATE
+                  type: TIMESTAMP
+              - column:
+                  name: USERNAME
+                  type: VARCHAR(255)
+            tableName: USER
+  - changeSet:
+      id: 1553855357631-5
+      author: siim (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: USER_ID
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: CLIENTS_ID
+                  type: BIGINT
+            tableName: USER_CLIENTS
+  - changeSet:
+      id: 1553855357631-6
+      author: siim (generated)
+      changes:
+        - addUniqueConstraint:
+            columnNames: USERNAME
+            constraintName: UK_3K4CPLVH82SRUEUTTFKWNYLQ0
+            tableName: APP_USER
+  - changeSet:
+      id: 1553855357631-7
+      author: siim (generated)
+      changes:
+        - addUniqueConstraint:
+            columnNames: CLIENTS_ID
+            constraintName: UK_N9D4A294YHPK9T2VB2VO2JMJL
+            tableName: USER_CLIENTS
+  - changeSet:
+      id: 1553855357631-8
+      author: siim (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: COUNTRY_ID
+            indexName: FKEVDWLRXHBCT07E6DIGHAUJ6ER_INDEX_7
+            tableName: CLIENT
+  - changeSet:
+      id: 1553855357631-9
+      author: siim (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: USER_ID
+            indexName: FKKV83JGLH3VE4A65AN1OACWXWB_INDEX_1
+            tableName: USER_CLIENTS
+  - changeSet:
+      id: 1553855357631-10
+      author: siim (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: USER_ID
+            indexName: FKQQDWACIDJQ73VUXPN95I63B5D_INDEX_7
+            tableName: CLIENT
+  - changeSet:
+      id: 1553855357631-11
+      author: siim (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: ID
+              - column:
+                  name: USER_ID
+            indexName: IDX_ID_USER_ID
+            tableName: CLIENT
+  - changeSet:
+      id: 1553855357631-12
+      author: siim (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: COUNTRY_ID
+            baseTableName: CLIENT
+            constraintName: FKEVDWLRXHBCT07E6DIGHAUJ6ER
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: ID
+            referencedTableName: COUNTRY
+            validate: true
+  - changeSet:
+      id: 1553855357631-13
+      author: siim (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: USER_ID
+            baseTableName: USER_CLIENTS
+            constraintName: FKKV83JGLH3VE4A65AN1OACWXWB
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: ID
+            referencedTableName: USER
+            validate: true
+  - changeSet:
+      id: 1553855357631-14
+      author: siim (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: USER_ID
+            baseTableName: CLIENT
+            constraintName: FKQQDWACIDJQ73VUXPN95I63B5D
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: ID
+            referencedTableName: APP_USER
+            validate: true
