@@ -21,7 +21,7 @@ Backend raamistik, põhilised teegid ja keel
 
 
 ## Rakenduse jooksutamine
-käivitada gradle'i bootRun
+käivitada gradle'i bootRun  
 rakenduse jookseb aadressil http://localhost:8080
 
 ## Testkasutajad
@@ -36,7 +36,7 @@ rakenduse jookseb aadressil http://localhost:8080
 $ cd frontend/app
 $ yarn build
 ```
-yarn build käsk kopeerib dist kausta sisu kausta ../../backend/app/src/main/resources/public.
+**yarn build käsk kopeerib dist kausta sisu kausta ../../backend/app/src/main/resources/public.**
 
 ## Teadaolevad puudused
 * Frontend koodi serveeritakse backend rakenduse sees. Tehtud lihtsuse mõttes ja et võimaldada rakenduse jooksutamist ühe nupuvajutusega
