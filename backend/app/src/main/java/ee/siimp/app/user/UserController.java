@@ -33,6 +33,7 @@ public class UserController {
     public UserDto currentUser(Principal principal) {
         LOG.info("returning user info for user {}", principal.getName());
         AppUserDetails appUserDetails = AuthorizationUtils.getAppUserDetails(principal);
+        LOG.info("found user {}", appUserDetails.getUsername());
         return new UserDto(appUserDetails.getUserId(), appUserDetails.getUsername());
     }
 
@@ -51,6 +52,7 @@ public class UserController {
         AuthorizationUtils.isSameUser(principal, userId);
         LOG.info("adding new client for user {}", userId);
         Client client = clientService.save(userId, userClientForm);
+        LOG.info("adding new client succeeded, new client id is {}", client.getId());
         return ResponseEntity.ok(UserClientDto.of(client));
     }
 
@@ -76,7 +78,7 @@ public class UserController {
                                                       @PathVariable("clientId") Long clientId,
                                                       @RequestBody @Valid UserClientUpdateForm userClientUpdateForm) {
         AuthorizationUtils.isSameUser(principal, userId);
-        LOG.info("updating client {} new client for user {}", clientId, userId);
+        LOG.info("updating client id={}", clientId);
 
 
         Optional<Client> userClientOptional = clientRepository.findByIdAndUserId(clientId, userId);
@@ -89,6 +91,7 @@ public class UserController {
         }
 
         Client client = clientService.update(userClientOptional.get(), userClientUpdateForm);
+        LOG.info("update succeeded");
         return ResponseEntity.ok(UserClientDto.of(client));
     }
 
