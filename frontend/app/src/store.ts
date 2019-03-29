@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     user: {} as User,
     countries: [] as Country[],
-    API_URL: 'http://localhost:8080',
+    API_URL: '',
   },
   mutations: {
     setUser: (state, user: User) => {

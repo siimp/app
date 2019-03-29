@@ -11,7 +11,7 @@
 </template>
 
 <script lang='ts'>
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import axios from 'axios';
 import { mapActions, mapState } from 'vuex';
 
@@ -22,19 +22,21 @@ import { mapActions, mapState } from 'vuex';
   methods: {
     ...mapActions(['loadCountries']),
   },
-  data: () => {
-    return {
-      isDataLoaded: false,
-    };
-  },
   props: ['value'],
 })
 export default class CountrySelect extends Vue {
+
   public mounted() {
     const promise: Promise<void> = (this as any).loadCountries();
     promise.then(() => {
       (this as any).isDataLoaded = true;
     });
+  }
+
+  public data() {
+    return {
+      isDataLoaded: false,
+    };
   }
 }
 </script>

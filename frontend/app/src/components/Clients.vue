@@ -32,29 +32,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import axios from 'axios';
 import { Client, User } from '@/types';
-import { mapState, mapGetters } from 'vuex';
+import CommonComponent from '@/components/CommonComponent.vue';
 
-@Component({
-  computed: {
-    ...mapState([
-        'API_URL',
-    ]),
-    ...mapGetters([
-        'getUser',
-    ]),
-  },
-})
-export default class Clients extends Vue {
+@Component
+export default class Clients extends CommonComponent {
     private clients: Client[] = [];
 
     private API_URL?: string;
 
     public mounted() {
-        const user: User = (this as any).getUser;
-        axios
+        const promise: Promise<User> = (this as any).loadUser();
+        promise.then((user: User) => {
+            axios
             .get(this.API_URL + '/user/' + user.id + '/client')
             .then((response) => {
                 response.data.forEach((client: Client) => {
@@ -64,6 +56,7 @@ export default class Clients extends Vue {
             .catch((errorResponse) => {
                 console.log(errorResponse);
             });
+        });
     }
 }
 </script>

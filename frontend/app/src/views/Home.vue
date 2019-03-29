@@ -5,30 +5,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import Clients from '@/components/Clients.vue';
+import CommonComponent from '@/components/CommonComponent.vue';
 import axios from 'axios';
-import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
-import { User } from '@/types';
 
 @Component({
   components: {
     Clients,
   },
-  computed: {
-    ...mapState([
-        'user',
-    ]),
-  },
-  methods: {
-    ...mapActions([
-      'loadUser',
-    ]),
-  },
 })
-export default class Home extends Vue {
-  public mounted() {
-    (this as any).loadUser();
-  }
+export default class Home extends CommonComponent {
+
 }
 </script>

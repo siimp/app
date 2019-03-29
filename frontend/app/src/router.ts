@@ -16,12 +16,12 @@ export default new Router({
     {
       path: '/client',
       name: 'client',
-      component: () => import(/* webpackChunkName: "about" */ './views/ClientAdd.vue'),
+      component: () => import('./views/ClientAdd.vue'),
     },
     {
       path: '/client/:id',
       name: 'clientEdit',
-      component: () => import(/* webpackChunkName: "about" */ './views/ClientEdit.vue'),
+      component: () => import('./views/ClientEdit.vue'),
     },
   ],
 });

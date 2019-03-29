@@ -73,37 +73,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import axios from 'axios';
-import { Client, ClientAddForm, User } from '@/types';
-import { mapState, mapGetters, mapActions } from 'vuex';
+import { ClientAddForm, User } from '@/types';
 import CountrySelect from '@/components/CountrySelect.vue';
+import CommonComponent from '@/components/CommonComponent.vue';
 
 @Component({
   components: {
     CountrySelect,
   },
-  computed: {
-    ...mapState([
-        'API_URL',
-        'user',
-    ]),
-  },
-  methods: {
-    ...mapActions([
-      'loadUser',
-    ]),
-  },
 })
-export default class ClientAdd extends Vue {
+export default class ClientAdd extends CommonComponent {
 
     private form?: ClientAddForm;
     private errors?: any;
     private API_URL?: string;
-
-    public mounted() {
-      (this as any).loadUser();
-    }
 
     public addClient() {
       const user: User = (this as any).user;
