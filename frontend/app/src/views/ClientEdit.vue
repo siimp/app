@@ -118,7 +118,7 @@ export default class ClientAdd extends Vue {
     public saveClient() {
       const user: User = (this as any).user;
 
-      axios.post(this.API_URL + '/user/' + user.id + '/client/' + this.$route.params.id, this.form)
+      axios.put(this.API_URL + '/user/' + user.id + '/client/' + this.$route.params.id, this.form)
       .then((response) => {
         this.$router.push('/');
       })
