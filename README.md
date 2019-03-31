@@ -1,7 +1,8 @@
 # Näidisrakendus
-Kogu rakendus käivitab `bootRun` käsuga, frontend koodi serveerib spring-boot rakendus public ressursside kaustast. 
+Kogu rakendus asub kaustas `backend` kaustas ja käivitub `bootRun` käsuga. Frontend koodi serveerib spring-boot rakendus public ressursside kaustast. 
 Kasutaja autentitakse kasutajanime ja parooliga (vt pt Testkasutajad allpool) ning sessioon hoitakse püsti küpsise abil.
-Kõik kasutaja tegevused logitakse (korrelatsiooni id'd ei ole aga kõigi logi kirjete juures on kasutaja info').
+Kõik kasutaja tegevused logitakse. Korrelatsiooni id'd kasutamist ei pidanud antud rakenudse juures vajalikuks aga kõigi logi kirjete juures on kasutaja info,
+kes antud tegevuse algatas.
 
 ## Kasutatud tarkvara
 Frontend raamistik, põhilised teegid ja keel
